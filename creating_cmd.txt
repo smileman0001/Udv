@@ -1,0 +1,8 @@
+python -m venv venv #создание виртуального окружения
+source venv/bin/activate #его активация
+pip install django djangorestframework django-cors-headers psycopg2-binary
+django-admin startproject *django_proj_name*
+cd *django_proj_name&
+python manage.py startapp *django_app_name*
+npx create-react-app *react_app_name*
+
