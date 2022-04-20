@@ -1,0 +1,29 @@
+h4 {
+    text-align: center;
+}
+
+.product-wrapper {
+    display: flex;
+    padding: 20px 20px;
+}
+
+.product-image {
+    text-align: center;
+    flex: 60%;
+    border: 1px solid green;
+    height: 400px;
+}
+
+.product-info {
+    flex: 40%;
+    border: 1px dotted green;
+    padding-left: 10px;
+}
+
+input[type=submit] {
+    margin-left: 10px;
+}
+
+input[type=number] {
+    width: 100px;
+}

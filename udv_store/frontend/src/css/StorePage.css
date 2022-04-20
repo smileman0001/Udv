@@ -1,0 +1,26 @@
+.big-black-banner {
+    width: 600px;
+    height: 200px;
+    margin: 10px auto;
+    background-color: rgb(39, 0, 88);
+}
+
+.products-list-wrapper{
+    padding: 0 100px;
+}
+
+.products-list {
+    display: flex;
+    border: 2px dotted yellow;
+}
+
+.store-item {
+    text-align: center;
+    padding: 40px 0;
+    border: 1px solid green;
+    flex: 30%;
+}
+
+.link-extended:hover {
+    text-decoration: none;
+}
