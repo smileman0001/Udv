@@ -1,0 +1,12 @@
+.submit-button {
+    color: red;
+}
+
+.main-wrapper {
+    margin: 0 auto;
+    margin-top: 100px;
+    text-align: center;
+    width: 400px;
+    border: 2px dashed black;
+    padding: 20px 0;
+}
