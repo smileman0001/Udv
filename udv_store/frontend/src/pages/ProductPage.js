@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams, useResolvedPath } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import "../css/ProductPage.css"
+import UcoinIcon from '../svgs/UcoinIcon'
 
 const ProductPage = () => {
     let {productId} = useParams()
@@ -65,24 +66,20 @@ const ProductPage = () => {
                     <img src="" alt="Here product image" />
                 </div>
                 <div className="product-info">
-                    {product === null ? <p>Null</p> : <><p>Not null</p>
-                    <ul>Count: {Object.keys(product).map(key => (<li>{key}</li>))}</ul>
-                </>}
                     {product["product_info"] ? 
                     <>
                         <p> Name: {product.product_info.name}</p>
-                        <p> Photo: {product.product_info.photo}</p>
                         <p> Description: {product.product_info.description}</p> 
-                        <p> Price: {product.product_info.price}</p> 
+                        <p> Price: {product.product_info.price} <UcoinIcon width={20} height={20} /></p> 
                     </> :
                     <p>No info!</p>}
                     <form>
                         {product["count"] ? <>
                             <input type="number" max={10} min="1" name="product_count" 
                             value={product["count"]} onChange={(e) => changeCount(e)} />
-                            <input type="button" value="Place an order" onClick={(e) => navigate("/cart") }/>
+                            <input className="button" type="button" value="Order!" onClick={(e) => navigate("/cart") }/>
                         </> : <>
-                            <input type="button" name="buy_button" value="Buy" onClick={(e) => changeCount(e)} />
+                            <input className='button' type="button" name="buy_button" value="Buy" onClick={(e) => changeCount(e)} />
                         </>}
                     </form>
                 </div>

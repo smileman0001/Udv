@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import axios from 'axios'
 import AuthContext from '../context/AuthContext'
 import { Link } from 'react-router-dom'
+import StoreIcon from '../svgs/StoreIcon'
 
 const AdminHeader = () => {
   let {authTokens} = useContext(AuthContext)
@@ -28,11 +29,25 @@ const AdminHeader = () => {
 
   return (
     <>
-        {userInfo ? <>
-          <Link className='flex-item' to="/admin/main">Admin Panel</Link>{"|"}
-          <Link className='flex-item' to="/store">Back to Store</Link>{"|"}
-          <span className="flex-item">{userInfo["first_name"] + " " + userInfo["last_name"]}</span>
-        </> : <> </>}
+        {userInfo ? <div className='header'>
+          <div className='logo'>
+            <Link to="/store">
+              <StoreIcon />
+            </Link>
+            <ul>
+              <li>
+                <Link to="/admin/main" className='admin-panel-link'>
+                  Admin-panel 
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className='menu'>
+            <ul>
+              <li><span>{userInfo["first_name"] + " " + userInfo["last_name"]}</span></li>
+            </ul>
+          </div>
+        </div> : <> </>}
     </>
   )
 }

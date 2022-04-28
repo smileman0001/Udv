@@ -5,26 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37471f95-e1d6-48f4-8e85-01af7dbb0182" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Udv.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Udv.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/api/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/api/serializer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/context/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/context/AuthContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/components/AdminHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/components/AdminHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/components/StoreHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/components/StoreHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/css/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/css/Header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/css/PersonalPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/css/PersonalPage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/css/StorePage.css" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/css/StorePage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/pages/PersonalPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/pages/PersonalPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/pages/ProductPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/pages/ProductPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/udv_store/frontend/src/pages/StorePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/frontend/src/pages/StorePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udv_store/udv_store/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/udv_store/udv_store/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +68,7 @@
       <workItem from="1650950377760" duration="11804000" />
       <workItem from="1651001989065" duration="5126000" />
       <workItem from="1651048795831" duration="26226000" />
-      <workItem from="1651113295600" duration="4738000" />
+      <workItem from="1651113295600" duration="7296000" />
     </task>
     <servers />
   </component>

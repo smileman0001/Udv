@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Cart from '../components/Cart'
 import "../css/StorePage.css"
+import BannerSvg from '../svgs/BannerSvg'
+import UcoinIcon from '../svgs/UcoinIcon'
 
 const StorePage = () => {
 
@@ -29,29 +31,54 @@ const StorePage = () => {
         }
     }
 
+    const chunks = (arr, size) => 
+        Array.from(
+            new Array(Math.ceil(arr.length / size)),
+            (_, i) => arr.slice(i * size, i * size + size)
+        );
+
     return (
-        <>
+        <div className='container'>
             <h2 className='center-text'>Store Page</h2>
-            <div className='banner-wrapper'>
-                <div className='big-black-banner'></div>
+            <div class="banner">
+                <BannerSvg />
             </div>
-            <div className='products-list-wrapper'>
-                <div className='products-list'>
-                    {productsList.map(product => (
-                        <Link className='link-extended' to={"/store/" + String(product.product_id)}>
-                            <div className='store-item'>
-                                <img src="" alt="*Here product image*"></img>
-                                <p>Name: {product.name}</p>
-                                <p>Price: {product.price}</p>
-                            </div>
-                        </Link>
+            <div className='marketplace'>
+                <div class="title">
+                    <ul>
+                        <li><span className="category">Все товары</span></li>
+                        <li><span className="category">Футболки</span></li>
+                        <li><span className="category">Кружки</span></li>
+                        <li><span className="category">Аксессуары</span></li>
+                    </ul>
+                </div>
+                <div className='products-wrapper'>
+                    {chunks(productsList, 3).map(chunck => (
+                        <div className='products-row'>
+                            {chunck.map(product => (
+                                <Link className='link-extended' to={"/store/" + String(product.product_id)}>
+                                    <div className='products-item'>
+                                        <div className="item-img">
+                                            <img src="" alt="*Here product image*"></img>
+                                        </div>
+                                        <div className='item-info'>
+                                            <div className='item-name'>{product["name"]}</div>
+                                            <div className='item-price'>
+                                                {product["price"]} 
+                                                <UcoinIcon width={20} height={20} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>  
                     ))}
                 </div>
                 <div className='cart-wrapper'>
                     <Cart />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
+import "../css/OrdersPage.css"
 
 const RequestsPage = () => {
     let {user} = useContext(AuthContext)
@@ -28,14 +29,14 @@ const RequestsPage = () => {
     }
 
     return (
-        <>
+        <div className='container'>
             <div className="orders-wrapper">
                 {ordersList ? <>
                     {ordersList.map(order => {
                         if (order["user_id"] !== user.user_id) {
                             return (
                                 <div className="orders-item">
-                                    <p onClick={() => navigate("/admin/orders/" + String(order["id"]))}>ORDER #{order["id"]}</p>
+                                    <div className='order-link' onClick={() => navigate("/admin/orders/" + String(order["id"]))}>ORDER #{order["id"]}</div>
                                     <p>Date: {order["created_date"]}</p>
                                 </div>
                             )
@@ -47,7 +48,7 @@ const RequestsPage = () => {
                 
                 </>}
             </div>
-        </>
+        </div>
     )
 }
 
