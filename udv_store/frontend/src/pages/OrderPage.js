@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import "../css/OrderPage.css"
 
 const OrderPage = () => {
     let {orderId} = useParams()
@@ -46,8 +47,8 @@ const OrderPage = () => {
     }
 
     return (
-        <>
-            <h3>Order #{orderId}</h3>
+        <div className='container'>
+            <h4>Order #{orderId}</h4>
             {orderInfo ? <>
                 <div className='user-info'>
                     <p>UserId: #{orderInfo["user_id"]}</p>
@@ -72,9 +73,9 @@ const OrderPage = () => {
                         <p>Office: ул. Ясная, 12</p>
                     </>}
                 </>}
-                <input type="button" value="Completed!" onClick={completeOrder} />
+                <input className="complete-order-btn" type="button" value="Completed!" onClick={completeOrder} />
             </> : <> </>}
-        </>
+        </div>
     )
 }
 

@@ -76,11 +76,11 @@ const OrdersPage = () => {
   }
 
   return (
-    <>
+    <div className='container'>
       {requestsList ? <div className="requests-wrapper">
         {requestsList.map((request, index) => (
           <div className="requests-item">
-            <p>Request #{request["request_id"]}</p>
+            <h4>Request #{request["request_id"]}</h4>
             <p>User: {request["user_name"]}</p>
             <p>Activity: {request["activity_name"]}</p>
             <p>Comment: {request["comment"]}</p>
@@ -97,7 +97,7 @@ const OrdersPage = () => {
       </div> : <> <p>
         Requests list in empty!  
       </p></>}
-    </>
+    </div>
   )
 }
 

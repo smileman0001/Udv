@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
+import "../css/ConfirmPage.css"
 
 const ConfirmPage = () => {
     let navigate = useNavigate()
@@ -44,20 +45,30 @@ const ConfirmPage = () => {
     } 
 
     return (
-        <div>
+        <div className='container'>
             {!accepted ? <>
-                <form onSubmit={createOrder}>
+                <form onSubmit={createOrder} className="office-form-wrapper">
                     <div className="office-choice">
-                        <p>Please select office:</p>
-                        <input type="radio" id="office_1" name="office" value="LA" />
-                        <label htmlFor="office_1">ул. Ленина, 45а</label><br />
-                        <input type="radio" id="office_2" name="office" value="MA" />
-                        <label htmlFor="office_2">ул. Мира, 32</label><br />
-                        <input type="radio" id="office_3" name="office" value="YA" />
-                        <label htmlFor="office_3">ул. Ясная, 12</label>
+                        <h4>Please select office:</h4>
+                        <div className='offices'>
+                            <div className='office-item'>
+                                <input type="radio" id="office_1" name="office" value="LA" />
+                                <label htmlFor="office_1">ул. Ленина, 45а</label><br />
+                            </div>
+                            <div className='office-item'>
+                                <input type="radio" id="office_2" name="office" value="MA" />
+                                <label htmlFor="office_2">ул. Мира, 32</label><br />
+                            </div>
+                            <div className='office-item'>
+                                <input type="radio" id="office_3" name="office" value="YA" />
+                                <label htmlFor="office_3">ул. Ясная, 12</label>
+                            </div>
+                        </div>
                     </div>
-                    <input type="button" value="Back to cart" onClick={() => navigate("/cart")} />
-                    <input type="submit" value="ORDER" />
+                    <div className="button-wrapper">
+                        <input className='cart-btn' type="button" value="Back to cart" onClick={() => navigate("/cart")} />
+                        <input className='accept-order-btn' type="submit" value="ORDER" />
+                    </div>
             </form>
             </> : <>
                 {order && order["order_id"] ? <>
