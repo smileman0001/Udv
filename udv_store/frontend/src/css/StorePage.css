@@ -21,6 +21,25 @@
     flex: 30%;
 }
 
-.link-extended:hover {
+.link-extended {
     text-decoration: none;
+}
+
+.link-extended:hover {
+    color: blue;
+}
+
+.cart-item {
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid greenyellow;
+}
+
+.total-price {
+    margin: 15px;
+}
+
+.cart-wrapper {
+    border: 1px solid orange;
+    margin: 10px 0;
 }

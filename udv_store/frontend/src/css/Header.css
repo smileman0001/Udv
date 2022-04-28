@@ -1,22 +1,39 @@
-.flex-wrapper {
+.store-header {
     display: flex;
-    justify-content: space-around;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid #EAEAEA;
+}
+  
+.logo {
+    margin-top: .3%;
+    margin-left: 15%;
 }
 
-.red-text {
-    color:red;
+.menu {
+    flex-grow: 1;   
 }
 
-.flex-item {
-    text-align: center;
-    flex: 50%;
+.menu ul {
+    display: flex;
+    flex-flow: row-reverse;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.logout {
-    background-color: lightblue;
+.menu li {
+    margin-right: 20px; 
+    font-size: 1.4em;
+    padding: 8px 20px;
+    text-decoration: none;
+    color: black;
 }
 
-.logout:hover {
-    background-color: rgb(194, 224, 234);
-    cursor: pointer;
+.menu li:first-child {
+    margin-right: 15%;
 }
+
+/* .menu a {
+} */

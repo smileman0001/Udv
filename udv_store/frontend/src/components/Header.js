@@ -1,22 +1,28 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import AdminHeader from './AdminHeader'
+import StoreHeader from './StoreHeader'
 import "../css/Header.css"
-import AuthContext from '../context/AuthContext'
+
 
 const Header = () => {
-  let {user, logoutUser} = useContext(AuthContext)
+  let [checkAdmin, setCheckAdmin] = useState(false)
+  let location = useLocation()
+
+
+  useEffect( () => {
+    setCheckAdmin(location.pathname.split("/").includes("admin"))
+  }, [location])
+
+
   return (
-    <div className="flex-wrapper">
-        <Link className="flex-item" to="/store">Store</Link> {"|"}
-        <Link className="flex-item" to="/personal">My Page</Link> {"|"}
-        { user !== null ?
-          <span className="flex-item" >
-            <strong>Balance: {user.balance} </strong>
-            <i>Role: {user.role} </i>
-            <span onClick={logoutUser} className="logout">Logout</span>
-          </span>:
-          <Link className="flex-item" to="/login">Login</Link> }
-    </div>
+    <>
+        { checkAdmin ? <>
+        <AdminHeader />
+        </> : <> 
+        <StoreHeader />
+        </> }
+    </>
   )
 }
 

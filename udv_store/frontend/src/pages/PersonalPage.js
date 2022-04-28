@@ -4,17 +4,17 @@ import AuthContext from '../context/AuthContext'
 
 
 const PersonalPage = () => {
-  let {user, authTokens, logoutUser} = useContext(AuthContext)
+  let {user, authTokens, logoutUser, updateUserBalance} = useContext(AuthContext)
   let [userInfo, setUserInfo] = useState({})
   let [activities, setActivities] = useState([])
   let [comment, setComment] = useState("InitialText")
 
   useEffect(() => {
     getUserInfo()
+    updateUserBalance()
   }, [])
 
   let getUserInfo = async () => {
-    console.log("Fetching user info")
     let url = "http://localhost:8000/api/userinfo/"
     let response = await fetch(url, {
       method: "GET",
@@ -48,8 +48,6 @@ const PersonalPage = () => {
     if (response.status == 200) {
       setActivities(activities = data)
     }
-
-    console.log(activities)
   }
 
   let createNewRequest = async (e) => {
