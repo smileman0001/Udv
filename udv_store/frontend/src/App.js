@@ -9,8 +9,12 @@ import PersonalPage from './pages/PersonalPage'
 import StorePage from "./pages/StorePage"
 import LoginPage from './pages/LoginPage'
 import ProductPage from './pages/ProductPage'
-import TestPage from './pages/TestPage'
-// import TaskExample from "./TasksExample"
+import ConfirmPage from './pages/ConfirmPage'
+import AdminPanel from './pages/AdminPanel'
+import RequestsPage from './pages/RequestsPage'
+import OrdersPage from './pages/OrdersPage'
+import OrderPage from './pages/OrderPage'
+import Cart from './components/Cart';
 
 
 const App = () => {
@@ -20,14 +24,21 @@ const App = () => {
                 <AuthProvider>
                     <Header />
                     <Routes>
-                        {/* <Route path="/task" element={<TaskExample />} /> */}
-                        <Route element={<ProtectedRoutes />}>
-                            <Route path="/personal" element={<PersonalPage />} />
-                            <Route path="/store" element={<StorePage />} />
-                            <Route path="/store/:productId" element={<ProductPage />} />
-                        </Route>
                         <Route path="/login" element={<LoginPage />} />
-                        <Route path="/test" element={<TestPage />} />
+                        <Route element={<ProtectedRoutes />}>
+                            <Route path="personal" element={<PersonalPage />} />
+                            <Route path="store" element={<StorePage />} />
+                            <Route path="store/:productId" element={<ProductPage />} />
+                            <Route path="cart" element={<Cart />} />
+                            <Route path="confirm" element={<ConfirmPage />} />
+                            <Route path="/admin">
+                                <Route path="main" element={<AdminPanel />} />
+                                <Route path="requests" element={<RequestsPage />} />
+                                <Route path="orders" element={<OrdersPage />} />
+                                <Route path="orders/:orderId" element={<OrderPage />} />
+
+                            </Route>
+                        </Route>
                     </Routes>
                 </AuthProvider>
             </Router>

@@ -25,8 +25,8 @@ class UsersInfo(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = "Информация о пользователях"
-        verbose_name_plural = "Информация о пользователе"
+        verbose_name = "Информация о пользователе"
+        verbose_name_plural = "Информация о пользователях"
 
 
 class Products(models.Model):
@@ -38,9 +38,13 @@ class Products(models.Model):
     photo = models.CharField(max_length=150)
     created_date = models.DateTimeField(auto_now_add=True)
 
+    def get_product_count(self):
+        products = Products.objects.get(product_id=self.product_id.pk)
+        return products.carts_set.all()
+
     class Meta:
-        verbose_name = "Продукты"
-        verbose_name_plural = "Продукт"
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
         get_latest_by = "created_date"
         ordering = ["name"]
 
@@ -54,8 +58,17 @@ class Carts(models.Model):
     count = models.PositiveSmallIntegerField()
 
     class Meta:
-        verbose_name = "Корзины"
-        verbose_name_plural = "Корзина"
+        verbose_name = "Корзина"
+        verbose_name_plural = "Корзины"
+
+    def get_json_cart_info(self):
+        return {
+            "product_id": self.product_id.product_id,
+            "product_name": self.product_id.name,
+            "product_photo": self.product_id.photo,
+            "product_price": self.product_id.price,
+            "count": self.count,
+        }
 
 
 class Activities(models.Model):
@@ -67,8 +80,8 @@ class Activities(models.Model):
     last_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Активности"
-        verbose_name_plural = "Активность"
+        verbose_name = "Активность"
+        verbose_name_plural = "Активности"
         ordering = ["created_date"]
         get_latest_by = "created_date"
 
@@ -84,15 +97,27 @@ class UcoinsRequests(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        unique_together = ["user_id", "activity_id"]
         ordering = ["created_date"]
         get_latest_by = ["created_date"]
-        verbose_name = "Запросы"
-        verbose_name_plural = "Запрос"
+        verbose_name = "Запрос"
+        verbose_name_plural = "Запросы"
+
+    def get_full_data(self):
+        return {
+            "request_id": self.request_id,
+            "user_id": self.user_id.id,
+            "user_name": ' '.join([self.user_id.usersinfo.first_name, self.user_id.usersinfo.last_name]),
+            "comment": self.comment,
+            "activity_id": self.activity_id.activity_id,
+            "activity_name": self.activity_id.name,
+            "created_date": self.created_date
+        }
 
 
 class Orders(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    products_list = models.CharField(max_length=200, null=False, blank=False)
+    products_list = models.BinaryField(null=False, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
 
     class OfficesChoice(models.TextChoices):
@@ -105,6 +130,16 @@ class Orders(models.Model):
     class Meta:
         ordering = ["created_date"]
         get_latest_by = ["created_date"]
-        verbose_name = "Заказы"
-        verbose_name_plural = "Заказ"
+        verbose_name = "Заказ"
+        verbose_name_plural = "Заказы"
+
+    def get_params(self):
+        user = self.user_id
+        return {
+            "order_id": self.id,
+            "user_id": user.id,
+            "user_name": ' '.join([user.usersinfo.first_name, user.usersinfo.last_name]),
+            "product_list": self.products_list,
+            "office_address": self.office_address
+        }
 
