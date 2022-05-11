@@ -1,0 +1,77 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 990;
+    background-color: white;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.header-wrapper::after {
+    display: block;
+    content: "";
+    height: 55px;
+}
+
+.admin-panel-link {
+    text-decoration: none;
+    color: red;
+    font-size: 1.4em;
+}
+
+.admin-panel-btn {
+    padding: 8px 20px;
+}
+
+.logo {
+    margin: .5% 0;
+    margin-left: 10%;
+    display: flex;
+}
+
+.menu {
+    flex-grow: 1;   
+}
+
+.menu ul {
+    display: flex;
+    flex-flow: row-reverse;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu li {
+    margin-right: 20px; 
+    padding: 8px 20px;
+}
+
+.menu li:first-child {
+    margin-right: 15%;
+}
+
+
+.menu-item {  
+    text-decoration: none;
+    color: black;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.logout:hover {
+    color: rgb(94, 94, 94);
+    cursor: pointer;
+}
+
+.login {
+    justify-content: space-around;
+}
+
+.center-logo {
+    margin-left: 0;
+}

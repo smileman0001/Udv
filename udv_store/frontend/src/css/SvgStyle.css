@@ -1,0 +1,62 @@
+.back-svg {
+    background: url("../svgPictures/AvatarBack.svg") no-repeat;
+    background-size: contain;
+    max-width: 434px;
+    max-height: 541px;
+    width: 100%;
+    height: 100%;    
+}
+
+.card {
+    padding-top: 2%;
+}
+
+.avatar-svg {
+    background: url("../svgPictures/Ava.svg") no-repeat;
+    background-size: contain;
+    max-width: 289px;
+    max-height: 289px;
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.information {
+    font-size: 26px;
+    padding-left: 40px;
+}
+
+.svg-wrapper {
+    background-color: rgb(255, 240, 245);
+    padding: 5% 20%;
+    height: 600px;
+    display: flex;
+    justify-content: space-between;
+    transform-style: preserve-3d;
+}
+
+.svg-wrapper::after {
+    box-sizing: border-box;
+}
+
+.svg-wrapper::before {
+    box-sizing: border-box;
+}
+
+.big-coin-1 {
+    transform: translateZ(-150px);
+}
+
+.big-coin-2 {
+    transform: translateZ(20px);
+
+}
+
+.average-coin {
+    transform: translateZ(-40px);
+
+}
+
+.small-coin {
+    transform: translateZ(40px);
+}

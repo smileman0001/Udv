@@ -1,0 +1,46 @@
+.office-form-wrapper {
+    margin: 20px 0;
+    border: 1px solid black;
+    display: flex;
+}
+
+.office-choice {
+    flex: 70%;
+}
+
+.button-wrapper {
+    flex: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.offices {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.office-item {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}
+
+.cart-btn {
+    color: black;
+    background-color: white;
+    width: 150px;
+    font-size: 1.5em;
+    margin: 0 auto;
+    margin-top: 30%;
+}
+
+.accept-order-btn {
+    color: white;
+    background-color: black;
+    width: 150px;
+    font-size: 1.5em;
+    margin: 0 auto;
+    margin-top: 20%;
+}
+

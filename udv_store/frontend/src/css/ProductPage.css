@@ -1,7 +1,3 @@
-h4 {
-    text-align: center;
-}
-
 .product-wrapper {
     display: flex;
     padding: 20px 20px;
@@ -9,19 +5,25 @@ h4 {
 
 .product-image {
     text-align: center;
-    flex: 60%;
+    flex: 70%;
     border: 1px solid green;
     height: 400px;
 }
 
 .product-info {
-    flex: 40%;
+    flex: 30%;
     border: 1px dotted green;
     padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-input[type=submit] {
-    margin-left: 10px;
+.buy-button {
+    background-color: #00e29d;
+    border-radius: 15%;
+    color: black;
+    width: 30%;
 }
 
 input[type=number] {
