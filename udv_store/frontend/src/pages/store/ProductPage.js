@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams, useResolvedPath } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
-import "../css/ProductPage.css"
-import UcoinIcon from '../svgs/UcoinIcon'
+import AuthContext from '../../context/AuthContext'
+import "../../css/ProductPage.css"
+import UcoinIcon from '../../svgs/UcoinIcon'
 
 const ProductPage = () => {
     let {productId} = useParams()
@@ -60,6 +60,7 @@ const ProductPage = () => {
 
     return (
         <>
+        <div className='container'>
             <h4>Product Page by id: {productId}</h4>
             <div className="product-wrapper">
                 <div className="product-image">
@@ -84,6 +85,7 @@ const ProductPage = () => {
                     </form>
                 </div>
             </div>
+        </div>
         </>
     )
 }

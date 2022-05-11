@@ -1,30 +1,35 @@
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 990;
+    background-color: white;
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center;
-    border-bottom: 2px solid #EAEAEA;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-.logo ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.header-wrapper::after {
+    display: block;
+    content: "";
+    height: 55px;
 }
 
-.logo li{
-    margin-right: 20px; 
-    padding: 8px 20px;
-}
-
-.admin-panel-link{
+.admin-panel-link {
     text-decoration: none;
     color: red;
     font-size: 1.4em;
 }
 
+.admin-panel-btn {
+    padding: 8px 20px;
+}
+
 .logo {
-    margin-top: .3%;
+    margin: .5% 0;
     margin-left: 10%;
     display: flex;
 }
@@ -55,9 +60,18 @@
     text-decoration: none;
     color: black;
     font-size: 1.4em;
+    cursor: pointer;
 }
 
 .logout:hover {
     color: rgb(94, 94, 94);
     cursor: pointer;
+}
+
+.login {
+    justify-content: space-around;
+}
+
+.center-logo {
+    margin-left: 0;
 }

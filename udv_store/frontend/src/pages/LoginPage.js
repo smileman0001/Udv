@@ -5,7 +5,7 @@ import "../css/LoginPage.css"
 const LoginPage = () => {
   let {loginUser} = useContext(AuthContext)
   return (
-    <>
+    <div className='container'>
       <div className="main-wrapper">
         <p>Login Page</p>
         <form onSubmit={loginUser}>
@@ -16,7 +16,7 @@ const LoginPage = () => {
           <input type="submit" value="Login" className='submit-button'/>
         </form>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -48,7 +48,6 @@ const OrdersPage = () => {
     rejectData(
       removed_request_id,
       e.target.rejected_comment.value)
-    // getRequestsList()
   }
 
   let acceptRequest = async (e) => {

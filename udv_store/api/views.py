@@ -5,13 +5,14 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.db.models import Q
 import io
 
-from .models import Activities, Products, Orders, UcoinsRequests, Carts
+from .models import Activity, Product, Order, UcoinRequest, Cart
 from django.contrib.auth.models import User
-from .serializer import UsersInfoSerializer, MyTokenObtainPairSerializer, \
-    ActivitiesListSerializer, UcoinsRequestCreateSerializer, ProductsSerializer, \
-    CartUsageSerializer, OrdersSerializer, CartsSerializer, \
+from .serializer import UserInfoSerializer, MyTokenObtainPairSerializer, PublicUserInfoSerializer, \
+    ActivityListSerializer, UcoinRequestSerializer, ProductsSerializer, OrderSerializer, \
+    UcoinRequestListSerializer, OrderListSerializer, \
     CustomOrdersSerializer, CustomUcoinsRequestsSerializer
 
 
@@ -23,22 +24,47 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @permission_classes([IsAuthenticated])
 def get_user_info(request):
     user = request.user
-    user_info = user.usersinfo
-    serializer = UsersInfoSerializer(user_info, many=False)
+    return Response(UserInfoSerializer(user.userinfo, many=False).data)
 
-    return Response(serializer.data)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_requests_latest(request):
+    user = request.user
+    return Response(UcoinRequestListSerializer(user.ucoinrequest_set.all()[:3], many=True).data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_orders_latest(request):
+    user = request.user
+    return Response(OrderListSerializer(user.order_set.all()[:3], many=True).data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_requests_full(request):
+    user = request.user
+    return Response(UcoinRequestListSerializer(user.ucoinrequest_set.all(), many=True).data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_orders_full(request):
+    user = request.user
+    return Response(OrderListSerializer(user.order_set.all(), many=True).data)
 
 
 @api_view(["GET"])
 def get_activities(request):
-    activities = Activities.objects.all()
-    serializer = ActivitiesListSerializer(activities, many=True)
+    activities = Activity.objects.all()
+    serializer = ActivityListSerializer(activities, many=True)
     return Response(serializer.data)
 
 
 @api_view(["GET"])
 def get_products(request):
-    products = Products.objects.all()
+    products = Product.objects.all()
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -46,18 +72,18 @@ def get_products(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_product(request, pk):
-    product = Products.objects.get(product_id=pk)
+    product = Product.objects.get(product_id=pk)
     serializer = ProductsSerializer(product, many=False)
     count = 0
-    if product.carts_set.filter(user_id=request.user).exists():
-        count = product.carts_set.get(user_id=request.user).count
+    if product.cart_set.filter(user_id=request.user).exists():
+        count = product.cart_set.get(user_id=request.user).count
     return Response({"product_info": serializer.data,
                      "count": count})
 
 
 @api_view(["POST"])
 def create_request(request):
-    serializer = UcoinsRequestCreateSerializer(data=request.data)
+    serializer = UcoinRequestSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
@@ -75,19 +101,19 @@ class CartAPIView(APIView):
                 'product_photo': item.product_id.photo,
                 'product_price': item.product_id.price,
                 "count": item.count
-            } for item in request.user.carts_set.all()
+            } for item in request.user.cart_set.all()
             ]})
 
     def post(self, request):
-        obj, created = Carts.objects.update_or_create(
-            product_id=Products.objects.get(product_id=request.data["product_id"]),
+        obj, created = Cart.objects.update_or_create(
+            product_id=Product.objects.get(product_id=request.data["product_id"]),
             user_id=request.user,
             defaults={"count": request.data["count"]})
         return Response({"message": "Successfully!"})
 
     def delete(self, request):
-        Carts.objects.get(
-            product_id=Products.objects.get(product_id=request.data["product_id"]),
+        Cart.objects.get(
+            product_id=Product.objects.get(product_id=request.data["product_id"]),
             user_id=request.user).delete()
         return Response({"message": "Successfully!"})
 
@@ -98,7 +124,7 @@ class UserOrdersAPIView(APIView):
 
     def get(self, request):
         serializer = CustomOrdersSerializer(
-            [order.get_params() for order in Orders.objects.all()],
+            [order.get_params() for order in Order.objects.all()],
             many=True
         )
         return Response(serializer.data)
@@ -106,12 +132,12 @@ class UserOrdersAPIView(APIView):
     def post(self, request):
         user = request.user
         office_address = request.data["office_address"]
-        cart = user.carts_set.all()
+        cart = user.cart_set.all()
         message = ""
         if cart.exists():
             products_list = [item.get_json_cart_info() for item in cart]
 
-            userinfo = user.usersinfo
+            userinfo = user.userinfo
             total_sum = sum([product['product_price'] * product["count"] for product in products_list])
 
             if userinfo.balance < total_sum:
@@ -120,7 +146,7 @@ class UserOrdersAPIView(APIView):
             userinfo.balance -= total_sum
             userinfo.save()
 
-            order = Orders.objects.create(
+            order = Order.objects.create(
                 user_id=user,
                 products_list=JSONRenderer().render(products_list),
                 office_address=office_address
@@ -135,25 +161,25 @@ class BalanceAPIView(APIView):
     parser_classes = [JSONParser]
 
     def get(self, request):
-        return Response({"balance": request.user.usersinfo.balance})
+        return Response({"balance": request.user.userinfo.balance})
 
 
 @api_view(["GET"])
 def get_orders(request):
-    orders = Orders.objects.all()
-    serializer = OrdersSerializer(orders, many=True)
+    orders = Order.objects.all()
+    serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
 
 
 @api_view(["GET", "DELETE"])
 def get_order(request, pk):
-    order = Orders.objects.get(id=pk)
+    order = Order.objects.get(id=pk)
     if request.method == "GET":
         user = order.user_id
         return Response({
             "products_list": JSONParser().parse(io.BytesIO(order.products_list)),
             "user_id": user.id,
-            "user_name": ' '.join([user.usersinfo.first_name, user.usersinfo.last_name]),
+            "user_name": ' '.join([user.userinfo.first_name, user.userinfo.last_name]),
             "office_address": order.office_address,
         })
     if request.method == "DELETE":
@@ -164,7 +190,7 @@ def get_order(request, pk):
 @api_view(["GET"])
 def get_requests(request):
     serializer = CustomUcoinsRequestsSerializer(
-        [item.get_full_data() for item in UcoinsRequests.objects.all()],
+        [item.get_full_data() for item in UcoinRequest.objects.all()],
         many=True
     )
     return Response(serializer.data)
@@ -172,11 +198,31 @@ def get_requests(request):
 
 @api_view(["POST", "DELETE"])
 def process_request(request, pk):
-    u_request = UcoinsRequests.objects.get(request_id=pk)
+    u_request = UcoinRequest.objects.get(request_id=pk)
+
     if request.method == "POST":
-        u_request.delete()
+        u_request.state = "RJ"
+        u_request.rejected_comment = request.data["comment"]
+        u_request.save()
+
     if request.method == "DELETE":
-        user = u_request.user_id
-        user.usersinfo.balance += u_request.activity_id.ucoins_count
-        u_request.delete()
+        userinfo = u_request.user_id.userinfo
+        userinfo.balance += u_request.activity_id.ucoins_count
+        userinfo.save()
+
+        u_request.state = "AC"
+        u_request.save()
+
     return Response({"message": "Successfully!"})
+
+
+@api_view(["GET"])
+def search_user(request, search_request):
+    users = User.objects.filter(
+           Q(userinfo__first_name__startswith=search_request) |
+           Q(userinfo__last_name__startswith=search_request)
+       )[:3]
+    if users:
+        return Response(PublicUserInfoSerializer([user.userinfo for user in users], many=True).data)
+    else:
+        return Response({"message": "Nothing found"})

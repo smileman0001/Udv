@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import "../css/AdminPanel.css"
+import "../../css/adminStyle/AdminPanel.css"
 
 const AdminPanel = () => {
     let navigate = useNavigate()
