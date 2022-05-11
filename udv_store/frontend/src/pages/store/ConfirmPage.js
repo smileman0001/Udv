@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
-import "../css/ConfirmPage.css"
+import AuthContext from '../../context/AuthContext'
+import "../../css/ConfirmPage.css"
 
 const ConfirmPage = () => {
     let navigate = useNavigate()

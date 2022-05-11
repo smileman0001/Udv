@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.renderers import JSONRenderer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import UsersInfo, Activities, UcoinsRequests, Products, Carts, Orders
+from .models import UserInfo, Activity, UcoinRequest, Product, Cart, Order
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -10,55 +10,63 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
-        token['role'] = user.usersinfo.role
+        token['role'] = user.userinfo.role
 
         return token
 
 
-class UsersInfoSerializer(serializers.ModelSerializer):
+class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UsersInfo
+        model = UserInfo
         fields = "__all__"
 
 
-class ActivitiesListSerializer(serializers.ModelSerializer):
+class PublicUserInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Activities
+        model = UserInfo
+        fields = ("user_id", "role", "first_name", "last_name", 'position')
+
+
+class ActivityListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Activity
         fields = ['activity_id', 'name']
 
 
-class UcoinsRequestCreateSerializer(serializers.ModelSerializer):
+class UcoinRequestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UcoinsRequests
+        model = UcoinRequest
         fields = "__all__"
+
+
+class UcoinRequestListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UcoinRequest
+        fields = ("request_id", "state")
 
 
 class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Products
+        model = Product
         fields = "__all__"
 
 
-class CartUsageSerializer(serializers.ModelSerializer):
-    class_ = serializers.CharField()
-    # def delete_method(self, request):
-    #     product = Products.objects.get(product_id=request.data["product_id"])
-    #     user = request.user
-    #     if Carts.objects.filter(product_id=product, user_id=user).exists():
-    #         Carts.objects.get(product_id=product, user_id=user).delete()
-    #     return "Successfully!"
-
-
-class CartsSerializer(serializers.ModelSerializer):
+class CartSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Carts
+        model = Cart
         fields = "__all__"
 
 
-class OrdersSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Orders
+        model = Order
         fields = "__all__"
+
+
+class OrderListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ("id", "state", "created_date", "products_list")
 
 
 class CustomOrdersSerializer(serializers.Serializer):

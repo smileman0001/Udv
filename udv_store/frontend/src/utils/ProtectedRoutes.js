@@ -2,6 +2,7 @@ import {Navigate, Outlet} from 'react-router-dom'
 import { useContext } from 'react'
 
 import AuthContext from '../context/AuthContext'
+import Cart from '../components/Cart'
 
 
 const useAuth = () => {
@@ -13,7 +14,7 @@ const useAuth = () => {
 
 const ProtectedRoutes = () => {
     const isAuth = useAuth()
-    return isAuth ? <Outlet /> : <Navigate to="/login" />
+    return isAuth ? <><Outlet /></> : <Navigate to="/login" />
 };
 
 

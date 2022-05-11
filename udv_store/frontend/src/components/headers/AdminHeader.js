@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import axios from 'axios'
-import AuthContext from '../context/AuthContext'
+import AuthContext from '../../context/AuthContext'
 import { Link } from 'react-router-dom'
-import StoreIcon from '../svgs/StoreIcon'
+import StoreIcon from '../../svgs/StoreIcon'
 
 const AdminHeader = () => {
   let {authTokens} = useContext(AuthContext)
@@ -34,13 +34,15 @@ const AdminHeader = () => {
             <Link to="/store">
               <StoreIcon />
             </Link>
-            <ul>
-              <li>
-                <Link to="/admin/main" className='admin-panel-link'>
-                  Admin-panel 
-                </Link>
-              </li>
-            </ul>
+            {/* <ul>
+              <li> */}
+                <div className='admin-panel-btn deactive'>
+                  <Link to="/admin/main" className="admin-panel-link">
+                    Admin-panel 
+                  </Link>
+                </div>
+              {/* </li>
+            </ul> */}
           </div>
           <div className='menu'>
             <ul>
